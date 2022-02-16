@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css"></link>
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Six+Caps&display=swap" rel="stylesheet">
+  </head>
+  <body>
+      <div class="water-bg"></div>
+      <div class="container">
+          <div class="title">
+              <div class="title-1">Spectacular Seires of</div>
+              <div class="title-2">Events that will</div>
+              <div class="title-3">Unwind you</div>
+          </div>
+          <p>Join us for a journey into the unknown and wow yours senses</p>
+      </div>
+      <div class="img"></div>
+      <div class="cursor"></div>
+    <!-- <h1>Hello, World!</h1> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./hover.js"></script>
+
+    <script>
+      // gsap
+      let tl = gsap.timeline()
+
+      // text animation
+      let textWrapper = document.querySelector('.title-1');
+      let textWrapper2 = document.querySelector('.title-2');
+      let textWrapper3 = document.querySelector('.title-3');
+
+      textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+      textWrapper2.innerHTML = textWrapper2.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+      textWrapper3.innerHTML = textWrapper3.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+      tl.to('.title-1 .letter', {opacity: 1, y: '0', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', stagger: '.03'})
+      tl.to('.title-2 .letter', {opacity: 1, y: '0', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', stagger: '.03'},"-=0.7")
+      tl.to('.title-3 .letter', {opacity: 1, y: '0', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', stagger: '.03'},"-=0.5")
+
+
+      // img hover effect
+      var myAnimation = new hoverEffect({
+          parent: document.querySelector('.img'),
+          intensity: 0.1,
+          image1: './abstract.jpg',
+          image2: './abstract2.jpg',
+          displacementImage: './transition.png'
+      });
+
+      // img & cursor move effect
+      const img = document.querySelector('.img');
+      const getCursor = document.querySelector('.cursor');
+      let scWidth = window.screen.width;
+
+      let cursor = {
+        x: 0,
+        y: 0
+      }
+
+
+      if(scWidth > 1024 ) {
+        document.addEventListener('mousemove', e => {
+              cursor.x = -e.clientX * 0.1;
+              cursor.y = -e.clientY * 0.1;
+              
+              img.style.transform = `translate(${cursor.x}px,${cursor.y}px)`
+              getCursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`
+              // console.log(`translate(${cursor.x}px,${cursor.y}px)`)
+            })
+      }
+      
+  </script>
+  </body>
+</html>
